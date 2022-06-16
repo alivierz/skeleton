@@ -4,10 +4,9 @@ const config = require('../../config')
 const jwt = require('jsonwebtoken')
 
 const loginUser = (req, res) => {
-    console.log(req.body)
-   /* if(!req.body){
+    if(!req.body){
         return res.status(400).json({message: "Missing data"})
-    } else*/ if (!req.body.email || !req.body.password){
+    } else if (!req.body.email || !req.body.password){
         return res.status(400).json({message: "Missing data"})
     }
     const response = authControllers.checkUsersCredential(req.body.email, req.body.password)

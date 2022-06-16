@@ -5,16 +5,17 @@ const app = require('../../app').app
 const userContollers = require('../../users/users.controllers')
 chai.use(chaiHttp)
 
+
 before(() => {
-    userContollers.createUser({
-        name: 'Admin',
-        email: 'alivieralejandro@academlo.com',
-        password: 'root',
-        username: 'admin',
+    userContollers.registerUser({
+        name : "Admin" ,
+        email : "sahid.kick@academlo.com" ,
+        password : "root" ,
+        username: "admin",
         age: 21,
-        image_profile: '',
-    });
-});
+        image_profile: ""
+    })
+})
 
 
 describe('Suite de testing de integracion para AUTH', () =>{
@@ -34,18 +35,18 @@ describe('Suite de testing de integracion para AUTH', () =>{
                 done()
             })
     })
-    it('Should return 200 when  jwt is valid', (done) =>{
+    it('Should reutn 200 when jwt is valid', (done) => {
         chai.request(app)
             .post('/api/v1/auth/login')
-            .set("content-type", "aplication/json")
+            .set("content-type", "application/json")
             .send({
-                email: "alivieralejandro@academlo.com",
-                password: "root"
+                email : "sahid.kick@academlo.com" ,
+                password : "root" 
             })
-            .end((err, res) =>{
-                console.log(res.body)
+            .end((err, res) => {
                 chai.assert.equal(res.status, 200)
+                chai.assert.typeOf(res.body.token, 'string')
                 done()
             })
-    })
+    } )
 })

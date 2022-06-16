@@ -1,8 +1,12 @@
+const crypto = require('../utils/crypto')
+const uuid = require('uuid')
+
+
 const userDB = {
     1: {
         id: 1,
         name: 'Alivier',
-        email: 'ajandro@academlo.com',
+        email: 'alivieralejandro@academlo.com',
         password: 'root',
         age: 21
     },
@@ -50,11 +54,30 @@ const getUserByEmail = (email) =>{
     }
     return value
 }
+
+const registerUser = (data) => {
+    const hashedPassword = crypto.hashPassword(data.password);
+    const userId = uuid.v4();
+    const newUser = {
+        id: userId,
+        ...data,
+        password: hashedPassword,
+        active: false,
+        role: 'normal',
+    };
+    userDB[Object.keys(userDB).length + 1] = newUser
+    return {
+        message: `User created succesfully with the id: ${userId}`,
+        user: newUser,
+    };
+};
+
 module.exports = {
     getAllUsers,
     getUserById,
     editUser,
     createUser,
     deleteUser,
-    getUserByEmail
+    getUserByEmail,
+    registerUser
 }

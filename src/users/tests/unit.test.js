@@ -19,7 +19,7 @@ const userDB = {
         age: 25
     }
 } 
-/*
+
 describe('Suite de Testing unitario para los controladores de usuarios' , () =>{
     it('testing to get one user', (done) =>{
         const user = {
@@ -69,14 +69,13 @@ describe('Suite de Testing unitario para los controladores de usuarios' , () =>{
         assert.equal(result.name, body.name)
         assert.equal(result.email, body.email)
         assert.equal(result.age, body.age)
-        assert.equal(result.id, 3)
+        assert.equal(result.id, 4)
         done()
     })
     it('testing delete user', (done) =>{
-        const result = controllers.deleteUser(3)
+        const result = controllers.deleteUser(4)
         assert.typeOf(result, 'object')
-        assert.equal(Object.keys(userDB).length, Object.keys(result).length)
+        assert.equal(Object.keys(userDB).length + 1, Object.keys(result).length)
         done()
     })
 })
-*/
